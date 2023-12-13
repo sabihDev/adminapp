@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import {
     Box,
     useTheme,
@@ -10,8 +10,8 @@ import {
     ListItemButton,
     ListItemIcon,
     ListItemText,
-    Typography
-} from '@mui/material'
+    Typography,
+} from "@mui/material";
 
 import {
     SettingsOutlined,
@@ -27,71 +27,73 @@ import {
     CalendarMonthOutlined,
     AdminPanelSettingsOutlined,
     TrendingUpOutlined,
-    PieChartOutlined
-} from '@mui/icons-material'
+    PieChartOutlined,
+} from "@mui/icons-material";
 
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from "react-router-dom";
+import profileImage from "../assets/profile.jpeg";
 
 const navItems = [
     {
-        text: 'Dashboard',
-        icon: <HomeOutlined />
+        text: "Dashboard",
+        icon: <HomeOutlined />,
     },
     {
-        text: 'Client Facing',
-        icon: null
+        text: "Client Facing",
+        icon: null,
     },
     {
-        text: 'Products',
-        icon: <ShoppingCartOutlined />
+        text: "Products",
+        icon: <ShoppingCartOutlined />,
     },
     {
-        text: 'Customers',
-        icon: <Groups2Outlined />
+        text: "Customers",
+        icon: <Groups2Outlined />,
     },
     {
-        text: 'Transactions',
-        icon: <ReceiptLongOutlined />
+        text: "Transactions",
+        icon: <ReceiptLongOutlined />,
     },
     {
-        text: 'Geography',
-        icon: <PublicOutlined />
+        text: "Geography",
+        icon: <PublicOutlined />,
     },
     {
-        text: 'Sales',
-        icon: null
+        text: "Sales",
+        icon: null,
     },
     {
-        text: 'Overview',
-        icon: <PointOfSaleOutlined />
+        text: "Overview",
+        icon: <PointOfSaleOutlined />,
     },
     {
-        text: 'Daily',
-        icon: <TodayOutlined />
+        text: "Daily",
+        icon: <TodayOutlined />,
     },
     {
-        text: 'Monthly',
-        icon: <CalendarMonthOutlined />
+        text: "Monthly",
+        icon: <CalendarMonthOutlined />,
     },
     {
-        text: 'Breakdown',
-        icon: <PieChartOutlined />
+        text: "Breakdown",
+        icon: <PieChartOutlined />,
     },
     {
-        text: 'Management',
-        icon: null
+        text: "Management",
+        icon: null,
     },
     {
-        text: 'Admin',
-        icon: <AdminPanelSettingsOutlined />
+        text: "Admin",
+        icon: <AdminPanelSettingsOutlined />,
     },
     {
-        text: 'Performance',
-        icon: <TrendingUpOutlined />
-    }
-]
+        text: "Performance",
+        icon: <TrendingUpOutlined />,
+    },
+];
 
 const SideBar = ({
+    user,
     isSidebarOpen,
     setIsSidebarOpen,
     isNonMobile,
@@ -121,13 +123,17 @@ const SideBar = ({
                                 backgroundColor: theme.palette.background.alt,
                                 boxSizing: "border-box",
                                 borderWidth: isNonMobile ? 0 : "2px",
-                                width: drawerWidth
-                            }
+                                width: drawerWidth,
+                            },
                         }}
                     >
                         <Box width="100%">
                             <Box m="1.5rem 2rem 2rem 3rem">
-                                <Box display="flex" justifyContent="space-between" alignItems="center">
+                                <Box
+                                    display="flex"
+                                    justifyContent="space-between"
+                                    alignItems="center"
+                                >
                                     <Typography variant="h4" fontWeight="bold">
                                         ECOMVISION
                                     </Typography>
@@ -136,40 +142,98 @@ const SideBar = ({
                                     <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
                                         <ChevronLeft />
                                     </IconButton>
-                                    )
-                                }
+                                )}
                             </Box>
                             <List>
                                 {navItems.map(({ text, icon }) => {
-                                    if(!icon) {
-                                        return(
+                                    if (!icon) {
+                                        return (
                                             <Typography key={text} sx={{ m: "2.25rem 0 1rem 3rem" }}>
                                                 {text}
                                             </Typography>
-                                        )
+                                        );
                                     }
 
                                     const lcText = text.toLowerCase();
 
                                     return (
                                         <ListItem key={text} disablePadding>
-                                            <ListItemButton onClick={() => {navigate(`/${lcText}`);
-                                            setIsActive(lcText)}} sx={{ backgroundColor: isActive === lcText ? theme.palette.secondary[300] : "transparent", color: isActive === lcText ? "primary.main" : "neutral.main" }}>
-                                                <ListItemIcon>
+                                            <ListItemButton
+                                                onClick={() => {
+                                                    navigate(`/${lcText}`);
+                                                    setIsActive(lcText);
+                                                }}
+                                                sx={{
+                                                    backgroundColor:
+                                                        isActive === lcText
+                                                            ? theme.palette.secondary[300]
+                                                            : "transparent",
+                                                    color:
+                                                        isActive === lcText
+                                                            ? theme.palette.primary[600]
+                                                            : theme.palette.secondary[100],
+                                                }}
+                                            >
+                                                <ListItemIcon
+                                                    sx={{
+                                                        ml: "2rem",
+                                                        color:
+                                                            isActive === lcText
+                                                                ? theme.palette.primary[600]
+                                                                : theme.palette.secondary[200],
+                                                    }}
+                                                >
                                                     {icon}
                                                 </ListItemIcon>
                                                 <ListItemText primary={text} />
+                                                {isActive === lcText && (
+                                                    <ChevronRightOutlined sx={{ ml: "auto" }} />
+                                                )}
                                             </ListItemButton>
                                         </ListItem>
-                                    )
+                                    );
                                 })}
                             </List>
+                        </Box>
+                        <Box backgroundColor={theme.palette.background.alt} position="absolute" bottom="0">
+                            <Divider />
+                            <Box
+                                display="flex"
+                                justifyContent="space-between"
+                                textTransform="none"
+                                m="1.5rem 2rem 0 3rem"
+                            >
+                                <Box
+                                    component="img"
+                                    alt="profile"
+                                    src={profileImage}
+                                    width="40px"
+                                    height="40px"
+                                    borderRadius="100%"
+                                    sx={{ objectFit: "cover" }}
+                                />
+                                <Box width="100%" textAlign="left" ml="1rem">
+                                    <Typography
+                                        fontWeight="bold"
+                                        fontSize="0.9rem"
+                                        sx={{ color: theme.palette.secondary[100] }}
+                                    >{user.name}</Typography>
+                                    <Typography
+                                        fontSize="0.8rem"
+                                        sx={{ color: theme.palette.secondary[200] }}
+                                    >{user.occupation}</Typography>
+                                    <SettingsOutlined
+                                        sx={{ color: theme.palette.secondary[300], fontSize: "25px" }}
+                                    />
+                                </Box>
+
+                            </Box>
                         </Box>
                     </Drawer>
                 )}
             </Box>
         </>
-    )
-}
+    );
+};
 
-export default SideBar
+export default SideBar;
