@@ -127,6 +127,7 @@ const SideBar = ({
                             },
                         }}
                     >
+
                         <Box width="100%">
                             <Box m="1.5rem 2rem 2rem 3rem">
                                 <Box
@@ -137,6 +138,41 @@ const SideBar = ({
                                     <Typography variant="h4" fontWeight="bold">
                                         ECOMVISION
                                     </Typography>
+                                </Box>
+                                <Box backgroundColor={theme.palette.background.alt} mt='40px'>
+                                    <Divider />
+                                    <Box
+                                        display="flex"
+                                        justifyContent="space-between"
+                                        textTransform="none"
+                                        mt="1rem"
+                                    >
+                                        <Box width="100px" mt='10px' overflow="hidden" height="60px" display="flex" alignItems="center" gap="1rem" borderRadius="50%" >
+                                            <Box
+                                                component="img"
+                                                alt="profile"
+                                                width="60px"
+                                                borderRadius="50%"
+                                                src={profileImage}
+                                                sx={{ objectFit: "contain" }}
+                                            />
+                                        </Box>
+                                        <Box width="100%" textAlign="left" ml="1rem">
+                                            <Typography
+                                                fontWeight="bold"
+                                                fontSize="0.9rem"
+                                                sx={{ color: theme.palette.secondary[100] }}
+                                            >{user.name}</Typography>
+                                            <Typography
+                                                fontSize="0.8rem"
+                                                sx={{ color: theme.palette.secondary[200] }}
+                                            >{user.occupation}</Typography>
+                                            <SettingsOutlined
+                                                sx={{ color: theme.palette.secondary[300], fontSize: "25px" }}
+                                            />
+                                        </Box>
+
+                                    </Box>
                                 </Box>
                                 {!isNonMobile && (
                                     <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
@@ -195,40 +231,7 @@ const SideBar = ({
                                 })}
                             </List>
                         </Box>
-                        <Box backgroundColor={theme.palette.background.alt} position="absolute" bottom="0">
-                            <Divider />
-                            <Box
-                                display="flex"
-                                justifyContent="space-between"
-                                textTransform="none"
-                                m="1.5rem 2rem 0 3rem"
-                            >
-                                <Box
-                                    component="img"
-                                    alt="profile"
-                                    src={profileImage}
-                                    width="40px"
-                                    height="40px"
-                                    borderRadius="100%"
-                                    sx={{ objectFit: "cover" }}
-                                />
-                                <Box width="100%" textAlign="left" ml="1rem">
-                                    <Typography
-                                        fontWeight="bold"
-                                        fontSize="0.9rem"
-                                        sx={{ color: theme.palette.secondary[100] }}
-                                    >{user.name}</Typography>
-                                    <Typography
-                                        fontSize="0.8rem"
-                                        sx={{ color: theme.palette.secondary[200] }}
-                                    >{user.occupation}</Typography>
-                                    <SettingsOutlined
-                                        sx={{ color: theme.palette.secondary[300], fontSize: "25px" }}
-                                    />
-                                </Box>
 
-                            </Box>
-                        </Box>
                     </Drawer>
                 )}
             </Box>
